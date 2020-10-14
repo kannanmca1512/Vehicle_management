@@ -1,0 +1,15 @@
+{% extends 'vehicle/base.html' %}
+{% load socialaccount %}
+{% providers_media_js %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<h2>Log In</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Log In</button>
+  <button><a href="{% provider_login_url "facebook" method="oauth2"%}">Facebook Login</button>
+  <button><a href="{% provider_login_url "google" %}">Google Login</button>
+</form>
+{% endblock %}

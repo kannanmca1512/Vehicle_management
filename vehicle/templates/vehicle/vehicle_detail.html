@@ -1,0 +1,30 @@
+{% extends 'vehicle/base.html' %}
+
+{% block content %}
+    <h1 class="my-4">Detail -
+        <small>{{ object.manufacturer }} {{ object.model }}</small>
+    </h1>
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-group">
+              <li class="list-group-item"><strong>Identifier:</strong> {{ object.identifier }}</li>
+              <li class="list-group-item"><strong>vehicle_type:</strong> {{ object.vehicle_type }}</li>
+              <li class="list-group-item"><strong>chase_no:</strong> {{ object.chase_no }}</li>
+              <li class="list-group-item"><strong>engine_no:</strong> {{ object.engine_no }}</li>
+              <li class="list-group-item"><strong>reg_no:</strong> {{ object.reg_no }}</li>
+              <li class="list-group-item"><strong>manufacturer:</strong> {{ object.manufacturer }}</li>
+              <li class="list-group-item"><strong>model:</strong> {{ object.model }}</li>
+              <li class="list-group-item"><strong>fuel:</strong> {{ object.fuel }}</li>
+              <li class="list-group-item"><strong>no_of_passengers:</strong> {{ object.no_of_passengers }}</li>
+              <li class="list-group-item"><strong>wheel_base:</strong> {{ object.wheel_base }}</li>
+              <li class="list-group-item"><strong>cubic_capacity:</strong> {{ object.cubic_capacity }}</li>
+            </ul>
+        </div>
+    </div>
+    <div class="row top-buffer">
+        <div class="col-12">
+                <a href="{% url 'vehicle_edit' object.id %}"><button type="button" class="btn btn-success">Edit</button></a>
+                <a href="{% url 'vehicle_list' %}"><button type="button" class="btn btn-secondary">Back</button></a>
+        </div>
+    </div>
+{% endblock %}

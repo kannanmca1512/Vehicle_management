@@ -1,0 +1,102 @@
+{% load static %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>User DashBoard</title>
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+  </head>
+  <style>
+    .bg-custom-1 {
+        background-color: #85144b;
+      }
+
+      .bg-custom-2 {
+      background-image: linear-gradient(15deg, #13547a 0%, #80d0c7 100%);
+      }
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: .5rem;
+        padding-left: 5.5rem;
+    }
+    .navbar-brand-user {
+        display: inline-block;
+        padding-top: 1rem;
+        padding-bottom: 0.3125rem;
+        margin-right: -5rem;
+        font-size: 1rem;
+        line-height: inherit;
+        white-space: nowrap;
+        color: #efe9e9 !important;
+    }
+  </style>
+  <body>
+
+    <!-- Modal HTML Markup -->
+    <div id="ModalExample" class="modal fade">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Logout</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="modal-body">
+                    <p class="lead text-xs-center">Are you sure you want to logout?</p>
+                    <div class="lead text-xs-center"><a class="btn btn-default btn-info" data-dismiss="modal">Cancel</a>
+                      <a class="btn btn-default btn-primary float-right" href="{% url 'logout' %}">Logout</a></div>
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- Navigation -->
+    {% if user.is_authenticated %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div style="width: 100%">
+          <a class="navbar-brand float-left" href="{% url 'vehicle_list' %}">Home</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav ml-auto">
+              <a class="navbar-brand-user">{{ user.first_name }} {{ user.last_name }}</a>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img src="{% static 'images/admin.png' %}" width="40" height="40" class="rounded-circle">
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" href="{% url 'vehicle_new' %}">New Vehicle</a>
+                    <a class="dropdown-item" data-toggle="modal" href="#ModalExample">Log Out</a>
+                  </div>
+                </li>   
+            </ul>
+          </div>
+        </div>
+      </nav>
+      {% else %}
+      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div style="width: 100%">
+          <a class="navbar-brand float-left" href="#">Home</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+          </div>
+        </div>
+      </nav>
+    {% endif %} 
+    <!-- Page Content -->
+    <div id="app">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <!-- /.container -->
+
+    <!-- Bootstrap core JavaScript -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'vehicle/base.html' %}
+
+{% block content %}
+    <h1 class="my-4">
+        <small>Vehicle List</small>
+    </h1>
+    {% if user.is_authenticated %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+        <div class="row">
+        {% if object_list %}
+        <div class="col-12 table-responsive">
+            <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Identifier</th>
+                    <th scope="col">Vehicle Type</th>
+                    <th scope="col">Chase No</th>
+                    <th scope="col">Engine No</th>
+                    <th scope="col">Registration No</th>
+                    <th scope="col">Manufacturer</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Fuel</th>
+                    <th scope="col">No of Passengers</th>
+                    <th scope="col">Wheel Base</th>
+                    <th scope="col">Cubic Capacity</th>
+                    <th scope="col">View</th>
+                    <th scope="col">Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for vehicle in object_list %}
+                <tr>
+                    <td>{{ vehicle.identifier }}</td>
+                    <td>{{ vehicle.vehicle_type }}</td>
+                    <td>{{ vehicle.chase_no }}</td>
+                    <td>{{ vehicle.engine_no }}</td>
+                    <td>{{ vehicle.reg_no }}</td>
+                    <td>{{ vehicle.manufacturer }}</td>
+                    <td>{{ vehicle.model }}</td>
+                    <td>{{ vehicle.fuel }}</td>
+                    <td>{{ vehicle.no_of_passengers }}</td>
+                    <td>{{ vehicle.wheel_base }}</td>
+                    <td>{{ vehicle.cubic_capacity }}</td>
+                    <td><a href="{% url 'vehicle_view' vehicle.id %}"><button type="button" class="btn btn-outline-primary btn-sm">View</button></a></td>
+                    <td><a href="{% url 'vehicle_delete' vehicle.id %}"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div class="col-12">
+            <div class="alert alert-warning" role="alert">
+                There is no vehicle detail, yet. But if you want, you can add from <a class="badge badge-info" href="{% url 'vehicle_new' %}"><strong>here.</strong></a>
+            </div>
+        </div>
+        {% endif %}
+        {% endif %}
+    </div>
+{% endblock %}
